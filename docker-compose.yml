@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  note-saver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - note-saver-data:/app/data
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - DATABASE_PATH=./data/notes.db
+    restart: unless-stopped
+
+volumes:
+  note-saver-data:
